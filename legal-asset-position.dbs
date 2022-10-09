@@ -47,7 +47,7 @@
 			<column name="Partner_Remaining_Share" type="DECIMAL" length="5" decimal="4" jt="3" />
 			<column name="Partner_Redemption_Date" type="DATE" length="10" decimal="0" jt="91" />
 			<column name="partner_partially_redeemed" type="BOOLEAN" length="1" decimal="0" jt="16" />
-			<column name="Partner_Asset_Status" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Partner_Asset_Status" type="DOUBLE" jt="8" />
 		</table>
 		<table name="vw_monthly_control_checks" >
 			<column name="reporting_date" type="STRING" length="255" decimal="0" jt="12" />
@@ -83,6 +83,10 @@
 			<entity schema="hive_metastore.asset_register" name="vw_monthly_control_checks_totals_mismatches" />
 			<entity schema="hive_metastore.asset_register" name="vw_monthly_control_checks" />
 		</group>
+		<script name="SQL_Editor" id="Editor-2486" language="SQL" >
+			<string><![CDATA[ALTER TABLE asset_register.vw_monthly_asset_dataset MODIFY Partner_Asset_Status DOUBLE  NULL  ;
+]]></string>
+		</script>
 	</layout>
 	<layout name="~Layout with Sample Tools" id="Layout-1a79" show_column_type="y" show_relation="columns" >
 		<entity schema="hive_metastore.asset_register" name="vw_monthly_asset_dataset" color="3986C1" x="48" y="48" />
@@ -164,18 +168,18 @@ FROM
 				<cell type="label" name="Vw_monthly_asset_dataset Data" template="H3" pos="0,0,1,0,l,c" />
 				<cell type="chart" name="Pie" template="Pie" pos="0,1,4,1,l,c" max_records="20" >
 					<form_script type="DataSource" language="SQL" >
-						<var name="reporting_date" />
-						<var name="Scheme_ID" />
-						<var name="Source" />
-						<var name="Product" />
-						<var name="IMS_Operating_Area" />
-						<var name="Old_Region_Name" />
+						<var name="reporting_date" type="-1" />
+						<var name="Scheme_ID" type="-1" />
+						<var name="Source" type="-1" />
+						<var name="Product" type="-1" />
+						<var name="IMS_Operating_Area" type="-1" />
+						<var name="Old_Region_Name" type="-1" />
 						<var name="Mortgage_Term_Years" type="8" />
 						<var name="Mortgage_Term_Months" type="8" />
 						<var name="No_of_Bedrooms" type="8" />
-						<var name="Address" />
-						<var name="Developing_Organisation_Name" />
-						<var name="Homebuy_Agent_Name" />
+						<var name="Address" type="-1" />
+						<var name="Developing_Organisation_Name" type="-1" />
+						<var name="Homebuy_Agent_Name" type="-1" />
 						<var name="Date_Recorded_in_HOP_Process" type="91" />
 						<var name="Completion_Actual_Date" type="91" />
 						<var name="Estimated_Completed_Date" type="91" />
@@ -190,26 +194,26 @@ FROM
 						<var name="Equity_Loan_Plus_Developer_Discount" type="3" />
 						<var name="Share_of_Restricted_Equity" type="3" />
 						<var name="Developer_Discount" type="3" />
-						<var name="Property_Type" />
-						<var name="Tenure" />
-						<var name="First_Time_Buyer_Flag" />
+						<var name="Property_Type" type="-1" />
+						<var name="Tenure" type="-1" />
+						<var name="First_Time_Buyer_Flag" type="-1" />
 						<var name="Total_Applicant_Income" type="3" />
-						<var name="Lenders_Name" />
+						<var name="Lenders_Name" type="-1" />
 						<var name="Payment_Indicator" type="16" />
 						<var name="Loan_Paid_From_Ims" type="3" />
 						<var name="Ims_Payment_Date" type="91" />
 						<var name="Recognised_Asset" type="16" />
 						<var name="Asset_Recognised_Date" type="91" />
-						<var name="Asset_Recognised_Source" />
+						<var name="Asset_Recognised_Source" type="-1" />
 						<var name="initial_share" type="3" />
 						<var name="HE_Remaining_Share" type="3" />
 						<var name="HE_Redemption_Date" type="91" />
 						<var name="HE_Partially_Redeemed" type="16" />
-						<var name="HE_Asset_Status" />
+						<var name="HE_Asset_Status" type="-1" />
 						<var name="Partner_Remaining_Share" type="3" />
 						<var name="Partner_Redemption_Date" type="91" />
 						<var name="partner_partially_redeemed" type="16" />
-						<var name="Partner_Asset_Status" />
+						<var name="Partner_Asset_Status" type="-1" />
 						<script ><![CDATA[SELECT * FROM asset_register.vw_monthly_asset_dataset]]></script>
 					</form_script>
 					<param name="i0" value="reporting_date" />
@@ -220,18 +224,18 @@ FROM
 				</cell>
 				<tableview name="sample" template="Table" css="table table-striped table-sm table-hover" pos="0,2,4,2,f,f" layout="{{-2,-2,-2,-2,-2,-2,-2},{-2,-2}}" scroll="n" html="n" header_rows="1" >
 					<form_script type="DataSource" language="SQL" >
-						<var name="reporting_date" />
-						<var name="Scheme_ID" />
-						<var name="Source" />
-						<var name="Product" />
-						<var name="IMS_Operating_Area" />
-						<var name="Old_Region_Name" />
+						<var name="reporting_date" type="-1" />
+						<var name="Scheme_ID" type="-1" />
+						<var name="Source" type="-1" />
+						<var name="Product" type="-1" />
+						<var name="IMS_Operating_Area" type="-1" />
+						<var name="Old_Region_Name" type="-1" />
 						<var name="Mortgage_Term_Years" type="8" />
 						<var name="Mortgage_Term_Months" type="8" />
 						<var name="No_of_Bedrooms" type="8" />
-						<var name="Address" />
-						<var name="Developing_Organisation_Name" />
-						<var name="Homebuy_Agent_Name" />
+						<var name="Address" type="-1" />
+						<var name="Developing_Organisation_Name" type="-1" />
+						<var name="Homebuy_Agent_Name" type="-1" />
 						<var name="Date_Recorded_in_HOP_Process" type="91" />
 						<var name="Completion_Actual_Date" type="91" />
 						<var name="Estimated_Completed_Date" type="91" />
@@ -246,26 +250,26 @@ FROM
 						<var name="Equity_Loan_Plus_Developer_Discount" type="3" />
 						<var name="Share_of_Restricted_Equity" type="3" />
 						<var name="Developer_Discount" type="3" />
-						<var name="Property_Type" />
-						<var name="Tenure" />
-						<var name="First_Time_Buyer_Flag" />
+						<var name="Property_Type" type="-1" />
+						<var name="Tenure" type="-1" />
+						<var name="First_Time_Buyer_Flag" type="-1" />
 						<var name="Total_Applicant_Income" type="3" />
-						<var name="Lenders_Name" />
+						<var name="Lenders_Name" type="-1" />
 						<var name="Payment_Indicator" type="16" />
 						<var name="Loan_Paid_From_Ims" type="3" />
 						<var name="Ims_Payment_Date" type="91" />
 						<var name="Recognised_Asset" type="16" />
 						<var name="Asset_Recognised_Date" type="91" />
-						<var name="Asset_Recognised_Source" />
+						<var name="Asset_Recognised_Source" type="-1" />
 						<var name="initial_share" type="3" />
 						<var name="HE_Remaining_Share" type="3" />
 						<var name="HE_Redemption_Date" type="91" />
 						<var name="HE_Partially_Redeemed" type="16" />
-						<var name="HE_Asset_Status" />
+						<var name="HE_Asset_Status" type="-1" />
 						<var name="Partner_Remaining_Share" type="3" />
 						<var name="Partner_Redemption_Date" type="91" />
 						<var name="partner_partially_redeemed" type="16" />
-						<var name="Partner_Asset_Status" />
+						<var name="Partner_Asset_Status" type="-1" />
 						<script ><![CDATA[SELECT * FROM asset_register.vw_monthly_asset_dataset]]></script>
 					</form_script>
 					<cell type="label" name="reporting_date" pos="0,0,0,0,c,c" />
