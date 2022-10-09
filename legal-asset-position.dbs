@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="DatabricksNew" id="Project-2372" database="DatabricksNew" >
+	<schema name="asset_register" catalogname="hive_metastore" >
+		<table name="vw_monthly_asset_dataset" >
+			<column name="reporting_date" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Scheme_ID" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Source" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Product" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="IMS_Operating_Area" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Old_Region_Name" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Mortgage_Term_Years" type="DOUBLE" length="15" decimal="0" jt="8" />
+			<column name="Mortgage_Term_Months" type="DOUBLE" length="15" decimal="0" jt="8" />
+			<column name="No_of_Bedrooms" type="DOUBLE" length="15" decimal="0" jt="8" />
+			<column name="Address" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Developing_Organisation_Name" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Homebuy_Agent_Name" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Date_Recorded_in_HOP_Process" type="DATE" length="10" decimal="0" jt="91" />
+			<column name="Completion_Actual_Date" type="DATE" length="10" decimal="0" jt="91" />
+			<column name="Estimated_Completed_Date" type="DATE" length="10" decimal="0" jt="91" />
+			<column name="HTB_Authority_to_Proceed_Date" type="DATE" length="10" decimal="0" jt="91" />
+			<column name="HTB_Completion_Date_Equity_Mortgage_Title" type="DATE" length="10" decimal="0" jt="91" />
+			<column name="Deposit" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="Equity_loan_funding" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="Mortgage" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="Purchase_Price" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="Admin_Allowance" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="Developer_Equity_Loan" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="Equity_Loan_Plus_Developer_Discount" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="Share_of_Restricted_Equity" type="DECIMAL" length="5" decimal="4" jt="3" />
+			<column name="Developer_Discount" type="DECIMAL" length="5" decimal="4" jt="3" />
+			<column name="Property_Type" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Tenure" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="First_Time_Buyer_Flag" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Total_Applicant_Income" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="Lenders_Name" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Payment_Indicator" type="BOOLEAN" length="1" decimal="0" jt="16" />
+			<column name="Loan_Paid_From_Ims" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="Ims_Payment_Date" type="DATE" length="10" decimal="0" jt="91" />
+			<column name="Recognised_Asset" type="BOOLEAN" length="1" decimal="0" jt="16" />
+			<column name="Asset_Recognised_Date" type="DATE" length="10" decimal="0" jt="91" />
+			<column name="Asset_Recognised_Source" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="initial_share" type="DECIMAL" length="5" decimal="4" jt="3" />
+			<column name="HE_Remaining_Share" type="DECIMAL" length="5" decimal="4" jt="3" />
+			<column name="HE_Redemption_Date" type="DATE" length="10" decimal="0" jt="91" />
+			<column name="HE_Partially_Redeemed" type="BOOLEAN" length="1" decimal="0" jt="16" />
+			<column name="HE_Asset_Status" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="Partner_Remaining_Share" type="DECIMAL" length="5" decimal="4" jt="3" />
+			<column name="Partner_Redemption_Date" type="DATE" length="10" decimal="0" jt="91" />
+			<column name="partner_partially_redeemed" type="BOOLEAN" length="1" decimal="0" jt="16" />
+			<column name="Partner_Asset_Status" type="STRING" length="255" decimal="0" jt="12" />
+		</table>
+		<table name="vw_monthly_control_checks" >
+			<column name="reporting_date" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="scheme_id" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="purchase_price_matches" type="BOOLEAN" length="1" decimal="0" jt="16" />
+			<column name="purchase_price_mismatch" type="DECIMAL" length="23" decimal="2" jt="3" />
+			<column name="payments_match_funding" type="BOOLEAN" length="1" decimal="0" jt="16" />
+			<column name="payments_mismatch" type="DECIMAL" length="21" decimal="2" jt="3" />
+			<column name="product_recognised_within_date_bounds" type="BOOLEAN" length="1" decimal="0" jt="16" />
+			<column name="current_share_invalid_reason" type="STRING" length="255" decimal="0" jt="12" />
+			<fk name="fk_vw_monthly_control_checks_vw_monthly_asset_dataset" virtual="y" to_schema="hive_metastore.asset_register" to_table="vw_monthly_asset_dataset" >
+				<fk_column name="reporting_date" pk="reporting_date" />
+				<fk_column name="scheme_id" pk="Scheme_ID" />
+			</fk>
+		</table>
+		<table name="vw_monthly_control_checks_totals_mismatches" >
+			<column name="reporting_date" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="htb_scheme_id" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="efin_scheme_id" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="product" type="STRING" length="255" decimal="0" jt="12" />
+			<column name="htb_equity_loan_funding" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="efin_equity_loan_funding" type="DECIMAL" length="30" decimal="2" jt="3" />
+			<column name="htb_admin_allowance" type="DECIMAL" length="20" decimal="2" jt="3" />
+			<column name="efin_admin_allowance" type="DECIMAL" length="30" decimal="2" jt="3" />
+		</table>
+	</schema>
+	<layout name="Main Layout" id="Layout-ba9" show_relation="columns" >
+		<comment><![CDATA[DatabricksNew]]></comment>
+		<entity schema="hive_metastore.asset_register" name="vw_monthly_asset_dataset" color="3986C1" x="48" y="80" />
+		<entity schema="hive_metastore.asset_register" name="vw_monthly_control_checks" color="BED3F4" x="704" y="112" />
+		<entity schema="hive_metastore.asset_register" name="vw_monthly_control_checks_totals_mismatches" color="BED3F4" x="1072" y="112" />
+		<group name="vw_monthly_control_checks" color="ECF0F7" >
+			<entity schema="hive_metastore.asset_register" name="vw_monthly_control_checks_totals_mismatches" />
+			<entity schema="hive_metastore.asset_register" name="vw_monthly_control_checks" />
+		</group>
+	</layout>
+	<layout name="~Layout with Sample Tools" id="Layout-1a79" show_column_type="y" show_relation="columns" >
+		<entity schema="hive_metastore.asset_register" name="vw_monthly_asset_dataset" color="3986C1" x="48" y="48" />
+		<entity schema="hive_metastore.asset_register" name="vw_monthly_control_checks" color="BED3F4" x="512" y="48" />
+		<entity schema="hive_metastore.asset_register" name="vw_monthly_control_checks_totals_mismatches" color="BED3F4" x="944" y="48" />
+		<script name="SQL Editor" id="Editor-28b" language="SQL" >
+			<string><![CDATA[SELECT reporting_date, Scheme_ID, Source, Product, IMS_Operating_Area, Old_Region_Name, Mortgage_Term_Years, Mortgage_Term_Months, 
+	No_of_Bedrooms, Address, Developing_Organisation_Name, Homebuy_Agent_Name, Date_Recorded_in_HOP_Process, Completion_Actual_Date, 
+	Estimated_Completed_Date, HTB_Authority_to_Proceed_Date, HTB_Completion_Date_Equity_Mortgage_Title, Deposit, Equity_loan_funding, 
+	Mortgage, Purchase_Price, Admin_Allowance, Developer_Equity_Loan, Equity_Loan_Plus_Developer_Discount, Share_of_Restricted_Equity, 
+	Developer_Discount, Property_Type, Tenure, First_Time_Buyer_Flag, Total_Applicant_Income, Lenders_Name, Payment_Indicator, 
+	Loan_Paid_From_Ims, Ims_Payment_Date, Recognised_Asset, Asset_Recognised_Date, Asset_Recognised_Source, initial_share, HE_Remaining_Share, 
+	HE_Redemption_Date, HE_Partially_Redeemed, HE_Asset_Status, Partner_Remaining_Share, Partner_Redemption_Date, partner_partially_redeemed, 
+	Partner_Asset_Status
+FROM
+	asset_register.vw_monthly_asset_dataset t;]]></string>
+		</script>
+		<browser id="Browse-21ed" name="Editor" confirm_updates="y" >
+			<browse_table schema="hive_metastore.asset_register" entity="vw_monthly_asset_dataset" x="31" y="20" width="400" height="300" />
+			<browse_table schema="hive_metastore.asset_register" entity="vw_monthly_asset_dataset" x="565" y="30" width="400" height="320" />
+		</browser>
+		<browser id="Browse-1fb8" name="Relational Data Explorer" confirm_updates="y" >
+			<browse_table schema="hive_metastore.asset_register" entity="vw_monthly_asset_dataset" x="20" y="20" width="400" height="300" />
+		</browser>
+		<query id="Query-1e66" name="Query Builder" >
+			<query_table schema="hive_metastore.asset_register" name="vw_monthly_asset_dataset" alias="vmad" x="48" y="48" >
+				<column name="reporting_date" />
+				<column name="Scheme_ID" />
+				<column name="Source" />
+				<column name="Product" />
+				<column name="IMS_Operating_Area" />
+				<column name="Old_Region_Name" />
+				<column name="Mortgage_Term_Years" />
+				<column name="Mortgage_Term_Months" />
+				<column name="No_of_Bedrooms" />
+				<column name="Address" />
+				<column name="Developing_Organisation_Name" />
+				<column name="Homebuy_Agent_Name" />
+				<column name="Date_Recorded_in_HOP_Process" />
+				<column name="Completion_Actual_Date" />
+				<column name="Estimated_Completed_Date" />
+				<column name="HTB_Authority_to_Proceed_Date" />
+				<column name="HTB_Completion_Date_Equity_Mortgage_Title" />
+				<column name="Deposit" />
+				<column name="Equity_loan_funding" />
+				<column name="Mortgage" />
+				<column name="Purchase_Price" />
+				<column name="Admin_Allowance" />
+				<column name="Developer_Equity_Loan" />
+				<column name="Equity_Loan_Plus_Developer_Discount" />
+				<column name="Share_of_Restricted_Equity" />
+				<column name="Developer_Discount" />
+				<column name="Property_Type" />
+				<column name="Tenure" />
+				<column name="First_Time_Buyer_Flag" />
+				<column name="Total_Applicant_Income" />
+				<column name="Lenders_Name" />
+				<column name="Payment_Indicator" />
+				<column name="Loan_Paid_From_Ims" />
+				<column name="Ims_Payment_Date" />
+				<column name="Recognised_Asset" />
+				<column name="Asset_Recognised_Date" />
+				<column name="Asset_Recognised_Source" />
+				<column name="initial_share" />
+				<column name="HE_Remaining_Share" />
+				<column name="HE_Redemption_Date" />
+				<column name="HE_Partially_Redeemed" />
+				<column name="HE_Asset_Status" />
+				<column name="Partner_Remaining_Share" />
+				<column name="Partner_Redemption_Date" />
+				<column name="partner_partially_redeemed" />
+				<column name="Partner_Asset_Status" />
+			</query_table>
+		</query>
+		<form name="Report" id="Report-a7a" template="Page" css="container-fluid" view="frame" >
+			<var name="samplePageNumber" type="4" value="0" mandatory="n" />
+			<var name="sampleRecordsPerPage" type="4" value="100" mandatory="n" />
+			<body name="Body" template="Grid" pos="0,0,0,0,f,f" layout="{{-2,-2,-2,-2,-1},{-2,-2,-2,-2}}" scroll="n" html="n" >
+				<cell type="label" name="Vw_monthly_asset_dataset Data" template="H3" pos="0,0,1,0,l,c" />
+				<cell type="chart" name="Pie" template="Pie" pos="0,1,4,1,l,c" max_records="20" >
+					<form_script type="DataSource" language="SQL" >
+						<var name="reporting_date" />
+						<var name="Scheme_ID" />
+						<var name="Source" />
+						<var name="Product" />
+						<var name="IMS_Operating_Area" />
+						<var name="Old_Region_Name" />
+						<var name="Mortgage_Term_Years" type="8" />
+						<var name="Mortgage_Term_Months" type="8" />
+						<var name="No_of_Bedrooms" type="8" />
+						<var name="Address" />
+						<var name="Developing_Organisation_Name" />
+						<var name="Homebuy_Agent_Name" />
+						<var name="Date_Recorded_in_HOP_Process" type="91" />
+						<var name="Completion_Actual_Date" type="91" />
+						<var name="Estimated_Completed_Date" type="91" />
+						<var name="HTB_Authority_to_Proceed_Date" type="91" />
+						<var name="HTB_Completion_Date_Equity_Mortgage_Title" type="91" />
+						<var name="Deposit" type="3" />
+						<var name="Equity_loan_funding" type="3" />
+						<var name="Mortgage" type="3" />
+						<var name="Purchase_Price" type="3" />
+						<var name="Admin_Allowance" type="3" />
+						<var name="Developer_Equity_Loan" type="3" />
+						<var name="Equity_Loan_Plus_Developer_Discount" type="3" />
+						<var name="Share_of_Restricted_Equity" type="3" />
+						<var name="Developer_Discount" type="3" />
+						<var name="Property_Type" />
+						<var name="Tenure" />
+						<var name="First_Time_Buyer_Flag" />
+						<var name="Total_Applicant_Income" type="3" />
+						<var name="Lenders_Name" />
+						<var name="Payment_Indicator" type="16" />
+						<var name="Loan_Paid_From_Ims" type="3" />
+						<var name="Ims_Payment_Date" type="91" />
+						<var name="Recognised_Asset" type="16" />
+						<var name="Asset_Recognised_Date" type="91" />
+						<var name="Asset_Recognised_Source" />
+						<var name="initial_share" type="3" />
+						<var name="HE_Remaining_Share" type="3" />
+						<var name="HE_Redemption_Date" type="91" />
+						<var name="HE_Partially_Redeemed" type="16" />
+						<var name="HE_Asset_Status" />
+						<var name="Partner_Remaining_Share" type="3" />
+						<var name="Partner_Redemption_Date" type="91" />
+						<var name="partner_partially_redeemed" type="16" />
+						<var name="Partner_Asset_Status" />
+						<script ><![CDATA[SELECT * FROM asset_register.vw_monthly_asset_dataset]]></script>
+					</form_script>
+					<param name="i0" value="reporting_date" />
+					<param name="width" value="100%" />
+					<param name="v0" value="Mortgage_Term_Years" />
+					<param name="title" value="Sample Chart" />
+					<param name="height" value="400px" />
+				</cell>
+				<tableview name="sample" template="Table" css="table table-striped table-sm table-hover" pos="0,2,4,2,f,f" layout="{{-2,-2,-2,-2,-2,-2,-2},{-2,-2}}" scroll="n" html="n" header_rows="1" >
+					<form_script type="DataSource" language="SQL" >
+						<var name="reporting_date" />
+						<var name="Scheme_ID" />
+						<var name="Source" />
+						<var name="Product" />
+						<var name="IMS_Operating_Area" />
+						<var name="Old_Region_Name" />
+						<var name="Mortgage_Term_Years" type="8" />
+						<var name="Mortgage_Term_Months" type="8" />
+						<var name="No_of_Bedrooms" type="8" />
+						<var name="Address" />
+						<var name="Developing_Organisation_Name" />
+						<var name="Homebuy_Agent_Name" />
+						<var name="Date_Recorded_in_HOP_Process" type="91" />
+						<var name="Completion_Actual_Date" type="91" />
+						<var name="Estimated_Completed_Date" type="91" />
+						<var name="HTB_Authority_to_Proceed_Date" type="91" />
+						<var name="HTB_Completion_Date_Equity_Mortgage_Title" type="91" />
+						<var name="Deposit" type="3" />
+						<var name="Equity_loan_funding" type="3" />
+						<var name="Mortgage" type="3" />
+						<var name="Purchase_Price" type="3" />
+						<var name="Admin_Allowance" type="3" />
+						<var name="Developer_Equity_Loan" type="3" />
+						<var name="Equity_Loan_Plus_Developer_Discount" type="3" />
+						<var name="Share_of_Restricted_Equity" type="3" />
+						<var name="Developer_Discount" type="3" />
+						<var name="Property_Type" />
+						<var name="Tenure" />
+						<var name="First_Time_Buyer_Flag" />
+						<var name="Total_Applicant_Income" type="3" />
+						<var name="Lenders_Name" />
+						<var name="Payment_Indicator" type="16" />
+						<var name="Loan_Paid_From_Ims" type="3" />
+						<var name="Ims_Payment_Date" type="91" />
+						<var name="Recognised_Asset" type="16" />
+						<var name="Asset_Recognised_Date" type="91" />
+						<var name="Asset_Recognised_Source" />
+						<var name="initial_share" type="3" />
+						<var name="HE_Remaining_Share" type="3" />
+						<var name="HE_Redemption_Date" type="91" />
+						<var name="HE_Partially_Redeemed" type="16" />
+						<var name="HE_Asset_Status" />
+						<var name="Partner_Remaining_Share" type="3" />
+						<var name="Partner_Redemption_Date" type="91" />
+						<var name="partner_partially_redeemed" type="16" />
+						<var name="Partner_Asset_Status" />
+						<script ><![CDATA[SELECT * FROM asset_register.vw_monthly_asset_dataset]]></script>
+					</form_script>
+					<cell type="label" name="reporting_date" pos="0,0,0,0,c,c" />
+					<cell type="label" name="Scheme_ID" pos="1,0,1,0,c,c" />
+					<cell type="label" name="Source" pos="2,0,2,0,c,c" />
+					<cell type="label" name="Product" pos="3,0,3,0,c,c" />
+					<cell type="label" name="IMS_Operating_Area" pos="4,0,4,0,c,c" />
+					<cell type="label" name="Old_Region_Name" pos="5,0,5,0,c,c" />
+					<cell type="label" name="Button can open other pages." pos="6,0,6,0,c,c" />
+					<cell type="label" name="${reporting_date}" template="Plain" pos="0,1,0,1,l,c" />
+					<cell type="label" name="${Scheme_ID}" template="Plain" pos="1,1,1,1,l,c" />
+					<cell type="label" name="${Source}" template="Plain" pos="2,1,2,1,l,c" />
+					<cell type="label" name="${Product}" template="Plain" pos="3,1,3,1,l,c" />
+					<cell type="label" name="${IMS_Operating_Area}" template="Plain" pos="4,1,4,1,l,c" />
+					<cell type="label" name="${Old_Region_Name}" template="Plain" pos="5,1,5,1,l,c" />
+					<cell type="button" name="More" template="Plain" css="btn btn-default btn-success" pos="6,1,6,1,c,c" ref_id="Report-a7a" />
+				</tableview>
+				<cell type="href" name="" disabled="${samplePageNumber&lt;1}" pos="0,3,0,3,l,c" glyph="FA-ANGLE_DOUBLE_LEFT" ref_id="Report-a7a" >
+					<var name="samplePageNumber" value="0" />
+				</cell>
+				<cell type="href" name="" disabled="${samplePageNumber&lt;1}" pos="1,3,1,3,l,c" glyph="FA-ANGLE_LEFT" ref_id="Report-a7a" >
+					<var name="samplePageNumber" value="${Math.max(0,samplePageNumber-1)}" />
+				</cell>
+				<cell type="label" name="Page ${samplePageNumber+1}" pos="2,3,2,3,l,c" />
+				<cell type="href" name="" disabled="${!sampleHasNextPage}" pos="3,3,3,3,l,c" glyph="FA-ANGLE_RIGHT" ref_id="Report-a7a" >
+					<var name="samplePageNumber" value="${( samplePageNumber+1 )}" />
+				</cell>
+			</body>
+		</form>
+	</layout>
+</project>
